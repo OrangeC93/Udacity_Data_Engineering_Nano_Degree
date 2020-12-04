@@ -1,5 +1,4 @@
 ## Data modeling
-
 - Process to support business and user applications
 - Gather requirements
 - Conceptual data modeling
@@ -14,3 +13,9 @@
 - Iterative Process: Data modeling is not a fixed process. It is iterative as new requirements and data are introduced. Having flexibility will help as new information becomes available.
 
 ## Relational database
+![image](/imgs/relational_database.png)
+
+## When to use Relational databse
+SQL, easier to change business requirements, modeling the data, secondary indexes available, ACID transactions -- data integrity
+
+## ACID transactions
