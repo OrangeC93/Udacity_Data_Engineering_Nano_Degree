@@ -45,3 +45,17 @@ The Basic:
 - Columns
 
 ## When to use NoSQL Database
+- Store different data type formats
+- Large amounts of data
+- Need horizontal scalability
+- Need high throughput
+- Need a flexible schema
+- Need high availability
+
+## When to use NoSQL Database
+- Need ACID transactions
+- Need ability to do JOINs
+- Ability to do aggregations and analytics
+- Have changing business requirements
+- Queries are not available and need to have flexibility
+- Have a small dataset
