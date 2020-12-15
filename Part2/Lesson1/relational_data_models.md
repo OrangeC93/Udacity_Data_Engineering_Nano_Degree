@@ -33,11 +33,20 @@ Logical Design Change:
 - Writes will be slower (insert, update, delete)
 
 ## Fact and Dimension Tables
+Fact tables: consists of the measurements, metrics or facts of a business process.
+
+Dimension tables: a structure that categorizes facts and measures in order to enable users to answer business questions. Dimensions are people, products, place and time.
 - Work together to create and organizaed data mode
 - While fact and dimension are not created differently in DDL, they are conceptual and extremely important for organization.
 
-Fact tables consists of the measurements, metrics or facts of a business process.
+## Star Schemas
+Star Schema is the simplest style of data mart schema. The star schema consists of one of more fact tables referencing any number of dimension tables.
 
-Dimension: a structure that categorizes facts and measures in order to enable users to answer business questions. Dimensions are people, products, place and time.
+- Benefits: denormalized, simplifies queries, fast aggregation
+- Drawbacks: data integrity, decrease query flexibility
 
-## Star Schema
+## Snowflake Schemas
+A complex snowflake shape emerges when the dimensions of a snowflake schema are elaborated, having multiple levels of relationships, child tables having multiple parents.
+- Star schema is a special, simplified case of the snowflake schema.
+- Star schema does not allow for one to many relationships while the snowflake schema does.
+- Snowflake schema is more normalized than Star schema but only in 1NF or 2NF
