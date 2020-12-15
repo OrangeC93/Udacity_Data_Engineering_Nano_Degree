@@ -26,3 +26,18 @@ Third Normal Form (3NF):
 
 ## Denormalization:
 JOINS on the database allow for outstanding flexibility but are extremely slow. If you are dealing with heavy reads on your database, you may want to think about denormalizing your tables. You get your data into normalized form, and then you proceed with denormalization. So, denormalization comes after normalization.
+
+Logical Design Change:
+- The designer is in charge of keeping data consistent
+- Reads will be faster (select)
+- Writes will be slower (insert, update, delete)
+
+## Fact and Dimension Tables
+- Work together to create and organizaed data mode
+- While fact and dimension are not created differently in DDL, they are conceptual and extremely important for organization.
+
+Fact tables consists of the measurements, metrics or facts of a business process.
+
+Dimension: a structure that categorizes facts and measures in order to enable users to answer business questions. Dimensions are people, products, place and time.
+
+## Star Schema
