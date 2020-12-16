@@ -27,3 +27,10 @@ The Primary key is made up of either just the partition key or with the addition
 - The clustering column will sort the data in sorted ascending order
 - More than one clustering column can be added (or none!)
 - From there the clustering columns will sort in order of how they were added to the primary key
+
+## Where
+- Data Modeling in Apache Cassandra is query focused, and that focus needs to be on the WHERE clause
+- Failure to include a WHERE clause will result in an error
+- The Partition key must be included in your query and any Clustering columns can be used in the order they appear in your Primary key
+
+Select * from table: The Where clause must be included to execute queries. It is recommended that one partition be queried at a time for performance implications. It is possible to do a select * from table if you add a configuration ALLOW FILTERING to your query. This is risky, but available if absolutely necessary.
