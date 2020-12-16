@@ -34,3 +34,13 @@ The Primary key is made up of either just the partition key or with the addition
 - The Partition key must be included in your query and any Clustering columns can be used in the order they appear in your Primary key
 
 Select * from table: The Where clause must be included to execute queries. It is recommended that one partition be queried at a time for performance implications. It is possible to do a select * from table if you add a configuration ALLOW FILTERING to your query. This is risky, but available if absolutely necessary.
+
+```
+For example: 
+PRIMARY KEY(year, artist_name, album_name)
+Failure: select * from music_libarary where year=1970 and location='liverpool' 
+Since you cannot try to access a column or a clustering column if you have not used the other defined clustering columns.
+Correct: select * from music_libarary where year=1970 and artist_name='the beatles' and album_name='let it be'
+
+
+```
