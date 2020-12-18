@@ -36,3 +36,20 @@ Facts & Dimensions:
 - Dimension tables: attributes like the sore at which an item is purchased, or the customer who made the call
 
 Fact or Dimension Dilemma: for facts, if you're unsure if a column is a fact or dimension, the simplest rule is that a fact is usually: Numberic & Additive
+
+## Kimball's Bus Architecture
+![image](/imgs/kimball.png)
+- Results in a common dimension data model shared by different departments
+- Data is not kept at the aggregated level, but rather at the atomic level
+- Organized by business processes, and used by different department
+
+ETL: A closer look
+- Extracting:
+  - Get the data from its source
+  - Possibly deleting old state
+- Transforming:
+  - Integrates many sources together
+  - Possibly cleansing: inconsistencies, duplication, missing values
+  - Possibly producing diagnostic metadata
+- Loading:
+  - Structuring and loading the data into the dimensional data model
