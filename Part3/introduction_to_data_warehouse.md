@@ -53,3 +53,27 @@ ETL: A closer look
   - Possibly producing diagnostic metadata
 - Loading:
   - Structuring and loading the data into the dimensional data model
+
+## Independent Data Mart
+![image](/imgs/data_mart.png)
+- Departments have independent ETL processes & dimensional models
+- These separate & smaller dimensional models are called "Data Marts"
+- Different fact tables for the same events, no conformed dimensions
+- Uncoordinated efforts can lead to inconsistent views
+- Despite awareness of the emergence of this architecture from departmental autonomy, it is generlly **discouraged**
+
+## CIF (Inmon's Corporate Information Factory)
+![image](/imgs/CIF.png)
+2 ETL Process
+- Source systems -> 3NF DB
+- 3NF DB -> Departmental Data Marts
+
+The 3NF DB acts an enterprise wide data store
+- Single integrated source of truth for data marts
+- Could be accessed by end-users if needed
+
+Data marts dimensionally modelled & unlike Kimball's dimensional models, they are mostly aggregated
+
+## Hybrid Kimball Bus && Inmon CIF
+![image](/imgs/hybrid.png)
+The Hybrid Kimball Bus and Inmon CIF model doesn't focus on Data Marts allowing department to individualize the data ETL process and denormalized data tables.
