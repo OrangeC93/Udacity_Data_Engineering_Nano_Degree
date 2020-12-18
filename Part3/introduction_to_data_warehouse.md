@@ -101,3 +101,39 @@ The "GROUP by CUBE(movie, branch, month)" will make one pass through the facts t
 ![image](/imgs/cube_query_optimization.png)
 
 Saving/Materializing the output of the CUBE operation and using it is usually enough to answer all forthcoming aggregations from business users without haivng to process the whole facts table again
+
+## OLAP Cubes Demo: Slicing & Dicing
+Slicing 
+- Slicing is the reduction of the dimensionality on a cube by 1 eg. 3 dimensions to 2, fixing one of the dimensions to a single values
+- In the example, we have a 3 dimensional cube on day, rating and country
+- In the example, rating is fixed and to "PG-13" which reduces the dimensionality
+
+Dicing
+- Creating a subcube, same dimensionality less values for 2 or more dimensions
+- eg. rating to (PG-13, PG), Date to (1, 15, 30), city to (Bellevue, Lancaster)
+
+
+## OLAP Cubes Demo: Roll-up
+Roll-up
+- Stepping up the level of aggregation to a large grouping
+- eg city is summed as country
+
+Drill-down
+- Breaking up one of the dimensions to a lower level
+- eg city is broken up to districts
+
+## OLAP Cubes Demo: Grouping Sets & CUBE
+Grouping sets
+```
+GROUP BY grouping sets((), dimDate.month, dimStore.country, (dimDate.month, dimStore.country))
+```
+
+equal to 
+
+Cube
+```
+GROUP BY cube(dimDate.month, dimStore.country)
+```
+
+## Data Warehouse Technoloy
+
