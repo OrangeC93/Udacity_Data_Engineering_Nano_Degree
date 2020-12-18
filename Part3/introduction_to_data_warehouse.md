@@ -77,3 +77,27 @@ Data marts dimensionally modelled & unlike Kimball's dimensional models, they ar
 ## Hybrid Kimball Bus && Inmon CIF
 ![image](/imgs/hybrid.png)
 The Hybrid Kimball Bus and Inmon CIF model doesn't focus on Data Marts allowing department to individualize the data ETL process and denormalized data tables.
+
+## OLAP Cubes
+An OLAP cube is an aggregation of a fact metric on a number of dimensions
+- Eg Movie, Branch, Month
+- Easy to communicate to business users
+- Common OLAP operations include: Rollup, drill-down, slice & dice
+
+## OLAP Cubes: Roll-Up and Drill Down
+Roll-up: sum up the sales of each city by country: eg, US, France(less columns in branch dimension).
+
+Drill-down: decompose the sales of each city into smaller districts(more columns in branch dimension)
+
+The OLAP cubes should store the finest grain of data(atomic data), in case we need to drill down to the lowest level, eg country->city->distric->street, etc.
+
+## OLAP Cubes query optimization
+Business users will typically want to slice, dice, roll up and drill down all the time
+
+Each such combination will potentially go through all the facts table (suboptimal)
+
+The "GROUP by CUBE(movie, branch, month)" will make one pass through the facts table and will aggregate all possible combinations of groupings, of length 0,1,2 and 3, eg:
+
+![image](/imgs/cube_query_optimization.png)
+
+Saving/Materializing the output of the CUBE operation and using it is usually enough to answer all forthcoming aggregations from business users without haivng to process the whole facts table again
