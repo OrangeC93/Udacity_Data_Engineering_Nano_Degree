@@ -41,3 +41,24 @@ Building a redshit cluster
 - It's advisable to setup a billing alarm to monitor AWS charges
 - Redshit nodes are somewhat expensive, and we spin a number of them
 
+## SQL-To-SQL ETL, how? Different database server
+Scenario 1: to copy the results of a query to another table (eg. facts or dimension table) in the same database, we can easily use SELECT INTO
+```
+SELECT fact1, fact2
+INTO newFactTable
+FROM table X, Y
+WHERE X.id = Y.fid x.v<> null
+GROUP BY Y.d
+```
+
+Scenario 2: to copy the results of query to another table on a totally different database server
+- If both servers are running the same RDBMS, that might be possible, but harder between two completely different RDBMSs.
+- And even if we can, we probably need to do some transformations, cleaning, governance, etc.
+```
+SELECT fact1, fact2
+INTO OtherServer.newFactTable
+FROM table X, Y
+WHERE X.id = Y.fid x.v<> null
+GROUP BY Y.d
+```
+## SQL-To-SQL ETL, AWS Case
