@@ -79,12 +79,73 @@ Ingesting at Scale: Use copy
 - If the file is large:
   - It's better to break it up to multiple files
   - Ingest in Parallel
-    - Either using a commond prefix
-    - Or a manifest file
+    - commond prefix
+    - manifest file
 - Ohter considerations 
   - Better to ingest from the same AWS region
   - Better to compress all the  csv files
 - One can also specify the delimiter to be used
 
 ## Redshift ETL Examples
-Common prefix example
+Common prefix example: common prefix
+```
+s3://mySource/sales-day1.csv.gz
+s3://mySource/sales-day2.csv.gz
+```
+![image](/imgs/common_prefix_example.png)
+
+Manifest file example: common suffix
+```
+s3://mySource/day1-sales.csv.gz
+s3://mySource/day2-sales.csv.gz
+```
+![image](/imgs/manifest_file_example.png)
+
+
+## Redshift ETL Continued: 
+Compression Optimization:
+- The optimal compression strategy for each column type is different
+- Redshift gives the user control over the compression of each column
+- The COPY command makes automatic best effort compression decisions for each column
+
+ETL from other sources
+- It is also possible to ingest directly using ssh from EC2 machines
+- Other than that
+  - S3 needs to be used as a staging area
+  - Usually, an EC2 ETL workder needs to run the ingestion jobs orchestrated by a dataflow product like Airflow, Luigi, Nifi, StreamSet, or AWS Data Pipeline
+  
+ETL Out of Redshift
+- Redshift is accessible, like any relational database, as a JDBC/ODBC source
+  - Natrually used by BI apps
+- However, we many need to extract data out of Redshift to pre-aggregated OLAP CUBES
+![image](/imgs/etl_out_of_redshift.png)
+
+## Redshift Cluster Quick Launcher
+
+## Problems with the Quick Launcher
+The cluster created by the Quick Launcher is a fully-functional one, but we need more functionality...
+
+Security:
+- The cluster is accessible only from the virtual private cloud
+- We need to access it from our jupyter workspace
+
+Access to S3
+- The cluster needs to access an S3 bucket
+
+## Infrastructure as Code on AWS
+Infracture-as-Code(IaC):
+- The ability to create infrastructure, i.e. machines, users, roles, folders and processes using code.
+- The ability to automate, maintain, deploy, replicate and share complex infractures as easily as you maintain code (undreamt-of in an on premise deployment).
+
+How to achieve IaC on AWS
+- aws-cli scripts: 
+  - similar to bash scripts
+  - simple & convenient
+![image](/imgs/aws_cli.png)
+- AWS sdk: 
+  - available in lots programming languages
+  - more power, could be integrated with apps
+![image](/imgs/aws_sdk.png)
+- Amazon Cloud formation: 
+  - json description of all resources, permission, constraints
+  - atomic, either all succeed or all fail
