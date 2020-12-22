@@ -62,3 +62,29 @@ WHERE X.id = Y.fid x.v<> null
 GROUP BY Y.d
 ```
 ## SQL-To-SQL ETL, AWS Case
+![image](/imgs/etl_aws_case.png)
+The advantage of using S3 for ETL storage compared to storing the data in our own EC2 instance
+- S3 is AWS-managed, we dont'need to worry about storage reliability
+- By using S3, we only pay for the storage we use
+- By using S3, we don't need to worry about not having enough storage
+
+## Redshift & ETL in Context
+![image](/imgs/etl_in_context.png)
+We need to copy the data already stored in S3 to another S3 staging bucket during the ETL process because it would be transformed before insertion into the DWH.
+
+## Ingesting at Scale
+Ingesting at Scale: Use copy
+- To transfer data from an S3 staging area to redshift use the Copy command
+- Inserting data row by using INSERT will be very slow
+- If the file is large:
+  - It's better to break it up to multiple files
+  - Ingest in Parallel
+    - Either using a commond prefix
+    - Or a manifest file
+- Ohter considerations 
+  - Better to ingest from the same AWS region
+  - Better to compress all the  csv files
+- One can also specify the delimiter to be used
+
+## Redshift ETL Examples
+Common prefix example
