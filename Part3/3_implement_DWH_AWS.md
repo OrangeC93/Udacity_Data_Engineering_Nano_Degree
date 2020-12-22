@@ -149,3 +149,24 @@ How to achieve IaC on AWS
 - Amazon Cloud formation: 
   - json description of all resources, permission, constraints
   - atomic, either all succeed or all fail
+  
+ ## Enabling Programmatic Access to IaC
+ - Use the python AWS SDK akda boto3
+ - Create one IAM user 
+ - Give admin privileges (attach policy)
+ - Open an incoming TCP port to access the endpoint
+ - Use its access token and secret to build our cluster and configure it, that should be our last click and fill process
+ 
+ ## Parallel ETL
+ - Get the params of the created redshift cluster
+  - Redshift cluster endpoint
+  - IAM role ARN that give access to redshit to read from S3
+ - Connect to the Redshift Cluster
+ - Create Tables for partitioned data
+ ![image](/imgs/creat_table1)
+ - Load partitioned data into the cluster
+![image](/imgs/load_data1)
+ - Create Tables for the non-partitioned data
+![image](/imgs/create_table2)
+ - Load non-partitioned data into the cluster
+![image](/imgs/load_data2)
