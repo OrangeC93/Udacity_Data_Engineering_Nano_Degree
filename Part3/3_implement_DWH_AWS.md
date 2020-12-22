@@ -163,10 +163,10 @@ How to achieve IaC on AWS
   - IAM role ARN that give access to redshit to read from S3
  - Connect to the Redshift Cluster
  - Create Tables for partitioned data
- ![image](/imgs/creat_table1)
+ ![image](/imgs/creat_table1.png)
  - Load partitioned data into the cluster
-![image](/imgs/load_data1)
+![image](/imgs/load_data1.png)
  - Create Tables for the non-partitioned data
-![image](/imgs/create_table2)
+![image](/imgs/create_table2.png)
  - Load non-partitioned data into the cluster
-![image](/imgs/load_data2)
+![image](/imgs/load_data2.png)
