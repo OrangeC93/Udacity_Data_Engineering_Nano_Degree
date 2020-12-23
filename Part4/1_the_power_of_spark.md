@@ -78,4 +78,22 @@ The technique works by first dividing up a large dataset and distributing the da
 
 While Spark doesn't implement MapReduce, you can write Spark programs that behave in a similar way to the map-reduce paradigm.
 
-![image](/imgs/mapreduce.png)
+![image](/imgs/map_reduce.png)
+
+## Spark Cluster
+Spark Modes:
+- Local Mode: when you are working with Spark installed on your own laptop
+- Cluster Modes: standalone, YARN, Mesos
+
+## Spark Usr Cases
+Spark's Limitations
+Spark has some limitation.
+
+Spark Streaming’s latency is at least 500 milliseconds since it operates on micro-batches of records, instead of processing one record at a time. Native streaming tools such as Storm, Apex, or Flink can push down this latency value and might be more suitable for low-latency applications. Flink and Apex can be used for batch computation as well, so if you're already using them for stream processing, there's no need to add Spark to your stack of technologies.
+
+Another limitation of Spark is its selection of machine learning algorithms. Currently, Spark only supports algorithms that scale linearly with the input data size. In general, deep learning is not available either, though there are many projects integrate Spark with Tensorflow and other deep learning tools.
+
+Hadoop versus Spark
+The Hadoop ecosystem is a slightly older technology than the Spark ecosystem. In general, Hadoop MapReduce is slower than Spark because Hadoop writes data out to disk during intermediate steps. However, many big companies, such as Facebook and LinkedIn, started using Big Data early and built their infrastructure around the Hadoop ecosystem.
+
+While Spark is great for iterative algorithms, there is not much of a performance boost over Hadoop MapReduce when doing simple counting. Migrating legacy code to Spark, especially on hundreds of nodes that are already in production, might not be worth the cost for the small performance boost.
