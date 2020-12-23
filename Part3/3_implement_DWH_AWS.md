@@ -170,3 +170,40 @@ How to achieve IaC on AWS
 ![image](/imgs/create_table2.png)
  - Load non-partitioned data into the cluster
 ![image](/imgs/load_data2.png)
+
+## Optimizing Table Design
+When a table is partitioned up into many pieces and distributed across slices in different machines, this is done blindly. If one has an idea about the frequency access pattern of a table, one can choose a more clever strategy.
+
+The 2 possible strategies are:
+- Distribution style
+- Storting key
+
+## Distribution Style: Even
+- Round-robin over all slices to achieve load-balancing
+- Good if a table won't be joined: high cost of join with even distribution(Shuffling)
+![image](/imgs/even_style.png)
+
+## Distribution Style: All
+- Small tables could be replicated on all slices to speed up joins:
+  - Store dimension with all distribution joins factSales with even distribution, join result in parallel, no shuffling!
+- Used frequently for dimension tables
+- AKR broadcasting
+![image](/imgs/all_style.png)
+
+## Distribution Style: Auto
+- Leave decision to Redshit
+- "Small enough" tables are distributed with an all strategy
+- Large tables are distribtued with EVEN strategy
+
+## Distribution Style: Key
+- Rows havign similar values are placed in the same slice
+- This can lead to a skewed distribution if some values of the dist key are more frequent than other
+- However, very useful when a dimension table is too big to be distributed with ALL strategy. In that case, we distribute both the fact table and the dimension table using the same dist key
+- If two tables are distributed on the joining keys, redshift collocates the rows from both tables on the same slices, which elimiates the shuffling a lot!
+![image](/imgs/key_style.png)
+
+## Sorting Key
+- One can define its columns as sort key
+- Upon loading, rows are sorted before distribution to slices
+- Minimizes the query time since each node already has contiguous ranges of rows based on the sortign key
+- Useful for columns that are used frequently in sorting like the date dimension and its corresponding foreign key in the fact table.
