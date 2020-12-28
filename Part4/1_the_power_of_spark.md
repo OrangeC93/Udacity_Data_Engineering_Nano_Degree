@@ -93,3 +93,5 @@ Spark's Limitations
 Hadoop versus Spark
 - The Hadoop ecosystem is a slightly older technology than the Spark ecosystem. In general, Hadoop MapReduce is slower than Spark because Hadoop writes data out to disk during intermediate steps. However, many big companies, such as Facebook and LinkedIn, started using Big Data early and built their infrastructure around the Hadoop ecosystem.
 - While Spark is great for iterative algorithms, there is not much of a performance boost over Hadoop MapReduce when doing simple counting. Migrating legacy code to Spark, especially on hundreds of nodes that are already in production, might not be worth the cost for the small performance boost.
+
+## [Spark Programming Guide](https://spark.apache.org/docs/2.2.0/rdd-programming-guide.html#accumulators)
