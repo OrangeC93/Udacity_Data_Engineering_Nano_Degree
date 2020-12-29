@@ -43,3 +43,6 @@ Big data Tech Effect:
 ![image](/imgs/s3_spark.png)
 - Athena
 ![image](/imgs/athena.png)
+
+## Data Lake issues
+![image](/imgs/data_lake_issues.png)
