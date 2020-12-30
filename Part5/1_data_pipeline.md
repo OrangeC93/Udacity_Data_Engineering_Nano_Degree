@@ -29,3 +29,11 @@ Apache Airflow is an open-source tool which structures data pipelines as DAGs.
 - Airflow is simple to maintain and can run data analysis itself, or trigger external tools (redshift, Spark, Presto, Hadoop, etc) during execution.
 - It provides a web-based UI for users to visualize and interact with their data pipelines.
 
+## How airflow works
+![image](/imgs/airflow_architecture.png)
+- The Airflow Scheduler starts DAGs based on time or external triggers.
+- Once a DAG is started, the Scheduler looks at the steps within the DAG and determines which steps can run by looking at their dependencies.
+- The Scheduler places runnable steps in the queue.
+- Workers pick up those tasks and run them.
+- Once the worker has finished running the step, the final status of the task is recorded and additional tasks are placed by the scheduler until all tasks are complete.
+- Once all tasks have been completed, the DAG is complete.
