@@ -22,4 +22,9 @@ Data validation in Actions
   DAGs and Data Pipelines
   - DAGs are a special subset of graphs in which the edges between nodes have a specific direction, and no cycles exist.
   
-  ## Apache Airflow
+## Apache Airflow
+Apache Airflow is an open-source tool which structures data pipelines as DAGs.
+- It allows users to write DAGs in Python that run on a schedule and/or from an external trigger. 
+- Airflow is simple to maintain and can run data analysis itself, or trigger external tools (redshift, Spark, Presto, Hadoop, etc) during execution.
+- It provides a web-based UI for users to visualize and interact with their data pipelines.
+
