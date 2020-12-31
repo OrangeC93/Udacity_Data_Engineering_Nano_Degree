@@ -65,3 +65,22 @@ task = PythonOperator(
 ```
 
 ## Operators and Tasks
+Operators define the atomic steps of work that make up a DAG. Airflow comes with many Operators that can perform common operations. Here are a handful of common ones:
+- PythonOperator
+- PostgresOperator
+- RedshiftToS3Operator
+- S3ToRedshiftOperator
+- BashOperator
+- SimpleHttpOperator
+- Sensor
+
+Task Dependencies:
+- a.set_downstream(b) means a comes before b
+- a.set_upstream(b) means a comes after b
+
+```
+hello_world_task = PythonOperator(task_id=’hello_world’, ...)
+goodbye_world_task = PythonOperator(task_id=’goodbye_world’, ...)
+...
+hello_world_task.set_downstream(goodbye_world_task)
+```
