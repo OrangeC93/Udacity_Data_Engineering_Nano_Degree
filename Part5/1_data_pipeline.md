@@ -39,3 +39,29 @@ Apache Airflow is an open-source tool which structures data pipelines as DAGs.
 - Once all tasks have been completed, the DAG is complete.
 
 ## Building a Data Pipeline 
+Creating a DAG:
+```
+from airflow import DAG
+divvy_dag = DAG(
+    'divvy',
+    description='Analyzes Divvy Bikeshare Data',
+    start_date=datetime(2019, 2, 4),
+    schedule_interval='@daily')
+```
+    
+Creating Operators to Perform Tasks
+```
+from airflow import DAG
+from airflow.operators.python_operator import PythonOperator
+
+def hello_world():
+    print(“Hello World”)
+
+divvy_dag = DAG(...)
+task = PythonOperator(
+    task_id=’hello_world’,
+    python_callable=hello_world,
+    dag=divvy_dag)
+```
+
+## Operators and Tasks
