@@ -32,3 +32,5 @@ Start Date
 
 End Date
 - Airflow pipelines can also have end dates. You can use an end_date with your pipeline to let Airflow know when to stop running the pipeline. End_dates can also be useful when you want to perform an overhaul or redesign of an existing pipeline. Update the old pipeline with an end_date and then have the new pipeline start on the end date of the old pipeline.
+
+Note: it's possible to rerun the DAG or clear the history of DAG, as a engineer you need to weight the pros and cons.
