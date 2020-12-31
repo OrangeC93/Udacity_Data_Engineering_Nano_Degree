@@ -37,3 +37,5 @@ Apache Airflow is an open-source tool which structures data pipelines as DAGs.
 - Workers pick up those tasks and run them.
 - Once the worker has finished running the step, the final status of the task is recorded and additional tasks are placed by the scheduler until all tasks are complete.
 - Once all tasks have been completed, the DAG is complete.
+
+## Building a Data Pipeline 
