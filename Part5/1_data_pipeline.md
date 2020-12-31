@@ -93,15 +93,86 @@ Connection via Airflow Hooks
   - SlackHook
   - PrestoHook
 ```
+import datetime
+import logging
+
 from airflow import DAG
+from airflow.models import Variable
+from airflow.operators.python_operator import PythonOperator
+from airflow.hooks.S3_hook import S3Hook
+
+
+def list_keys():
+    hook = S3Hook(aws_conn_id='aws_credentials')
+    bucket = Variable.get('s3_bucket')
+    prefix = Variable.get('s3_prefix')
+    logging.info(f"Listing Keys from {bucket}/{prefix}")
+    keys = hook.list_keys(bucket, prefix=prefix)
+    for key in keys:
+        logging.info(f"- s3://{bucket}/{key}")
+
+
+dag = DAG(
+        'lesson1.exercise4',
+        start_date=datetime.datetime.now())
+
+list_task = PythonOperator(
+    task_id="list_keys",
+    python_callable=list_keys,
+    dag=dag
+)
+```
+
+## Context and Templating
+Airflow leverages templating to allow users to “fill in the blank” with important runtime variables for tasks.
+
+
+## Demo: building the S3 TO Redshift DAG
+```
+import datetime
+import logging
+
+from airflow import DAG
+from airflow.contrib.hooks.aws_hook import AwsHook
 from airflow.hooks.postgres_hook import PostgresHook
+from airflow.operators.postgres_operator import PostgresOperator
 from airflow.operators.python_operator import PythonOperator
 
-def load():
-# Create a PostgresHook option using the `demo` connection
-    db_hook = PostgresHook(‘demo’)
-    df = db_hook.get_pandas_df('SELECT * FROM rides')
-    print(f'Successfully used PostgresHook to return {len(df)} records')
+import sql_statements
 
-load_task = PythonOperator(task_id=’load’, python_callable=hello_world, ...)
+
+def load_data_to_redshift(*args, **kwargs):
+    aws_hook = AwsHook("aws_credentials")
+    credentials = aws_hook.get_credentials()
+    redshift_hook = PostgresHook("redshift")
+    redshift_hook.run(sql.COPY_ALL_TRIPS_SQL.format(credentials.access_key, credentials.secret_key))
+
+
+dag = DAG(
+    'lesson1.exercise6',
+    start_date=datetime.datetime.now()
+)
+
+create_table = PostgresOperator(
+    task_id="create_table",
+    dag=dag,
+    postgres_conn_id="redshift",
+    sql=sql_statements.CREATE_TRIPS_TABLE_SQL
+)
+
+copy_task = PythonOperator(
+    task_id='load_from_s3_to_redshift',
+    dag=dag,
+    python_callable=load_data_to_redshift
+)
+
+location_traffic_task = PostgresOperator(
+    task_id="calculate_location_traffic",
+    dag=dag,
+    postgres_conn_id="redshift",
+    sql=sql_statements.LOCATION_TRAFFIC_SQL
+)
+
+create_table >> copy_task
+copy_task >> location_traffic_task
 ```
