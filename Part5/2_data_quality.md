@@ -48,3 +48,10 @@ Types of data partitioning
   - Also worth mentioning, the data location is another form of logical partitioning. For example, if our data is stored in a key-value store like Amazon's S3 in a format such as: s3://<bucket>/<year>/<month>/<day> we could say that our date is logically partitioned by time.
 - Size Partitioning
   - Size partitioning separates data for processing based on desired or required storage limits. This essentially sets the amount of data included in a data pipeline run. Size partitioning is critical to understand when working with large datasets, especially with Airflow.
+
+## Data Quality
+- Data must be a certain size
+- Data must be accurate to some margin of error
+- Data must arrive within a given timeframe from the start of execution
+- Pipelines must run on a particular schedule
+- Data must not contain any sensitive information
