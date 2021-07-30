@@ -50,3 +50,4 @@ A complex snowflake shape emerges when the dimensions of a snowflake schema are 
 - Star schema is a special, simplified case of the snowflake schema.
 - Star schema does not allow for one to many relationships while the snowflake schema does.
 - Snowflake schema is more normalized than Star schema but only in 1NF or 2NF
+![image](/imgs/snowflake.png)
