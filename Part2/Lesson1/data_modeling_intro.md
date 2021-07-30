@@ -52,7 +52,7 @@ The Basic:
 - Need a flexible schema
 - Need high availability
 
-## When to use NoSQL Database
+## When Not to use NoSQL Database
 - Need ACID transactions
 - Need ability to do JOINs
 - Ability to do aggregations and analytics
