@@ -19,9 +19,19 @@ SQL, easier to change business requirements, modeling the data, secondary indexe
 
 ## ACID transactions
 - Atomicity: The whole transaction is processed or nothing is processed. 
-- Consistency: Only transactions that abide by constraints and rules are written into the database, otherwise the database keeps the previous state. The data should be correct across all rows and tables.
-- Isolation: Transactions are processed independently and securely, order does not matter. A low level of isolation enables many users to access the data simultaneously, however this also increases the possibilities of concurrency effects (e.g., dirty reads or lost updates). On the other hand, a high level of isolation reduces these chances of concurrency effects, but also uses more system resources and transactions blocking each other. 
-- Durability: Completed transactions are saved to database even in cases of system failure. A commonly cited example includes tracking flight seat bookings. So once the flight booking records a confirmed seat booking, the seat remains booked even if a system failure occurs. 
+- Consistency: Only transactions that abide by constraints and rules are written into the database, otherwise the database keeps the previous state. 
+- Isolation: Transactions are processed independently and securely, order does not matter.
+  - A low level of isolation enables many users to access the data simultaneously, however this also increases the possibilities of concurrency effects (e.g., dirty reads or lost updates). On the other hand, a high level of isolation reduces these chances of concurrency effects, but also uses more system resources and transactions blocking each other. 
+- Durability: Completed transactions are saved to database even in cases of system failure. 
+  - A commonly cited example includes tracking flight seat bookings. So once the flight booking records a confirmed seat booking, the seat remains booked even if a system failure occurs. 
+
+## When Not to Use Relationsal Database
+- Have large amounts of data
+- Need to be able to store different data type format
+- Need high throughput - fast reads: While ACID transactions bring benefits, they also slow down the process of reading and writing data. If you need very fast reads and writes, using a relational database may not suit your needs.
+- Need a flexible schema
+- Need high availability
+- Need horizontal scalability: Horizontal scalability is the ability to add more machines or nodes to a system to increase performance and space for data.
 
 ## Creating Tables in Postgres
 
