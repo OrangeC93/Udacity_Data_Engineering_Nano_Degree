@@ -18,7 +18,8 @@ Operational database:
 Solution: create 2 processing modes, create a system for them to co-exist
 - OLTP: online transactional processing
 - OLAP: online analytical processing
-- Data Warehouse is system (inclusing processes, technologies and data representations) that enable us to support analytical processes
+- **Data Warehouse** is system (inclusing processes, technologies and data representations) that enable us to support analytical processes
+![image](/imgs/datawarehouse.png)
 
 ## Data Warehouse: Technical Perspective
 ETL: Extract the data from the source systems used for operations, Transform the data and load it into a dimensional model.
